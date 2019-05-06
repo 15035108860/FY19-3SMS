@@ -18,7 +18,7 @@ import com.neuedu.util.DBUtils;
 public class StudentManager {
 	
 	static StudentManager sm = new StudentManager();
-	//创建连接对象
+	//创建获取连接对象
 	Connection connection = DBUtils.getConnection();
 	StudentDaoImpl sdi = new StudentDaoImpl(connection);
 	
@@ -101,8 +101,24 @@ public class StudentManager {
 		String name = scanner.next();
 		System.out.println("请输入添加学生的年龄");
 		int age = scanner.nextInt();
+		while(true) {
+			if(age > 120 || age < 0 ) {
+				System.out.println("年龄:"+age+"输入有误,请重新输入:");
+				age = scanner.nextInt();
+			}else {
+				break;
+			}	
+		}
 		System.out.println("请输入添加学生的性别");
 		String sex = scanner.next();
+		while(true) {
+			if(!(sex.equals("男") || sex.equals("女"))) {
+				System.out.println("性别:"+sex+"输入有误,请重新输入:");
+				sex = scanner.next();
+			}else {
+				break;
+			}	
+		}
 		Student stu = new Student(id, name, age, sex);
 		sdi.addOneStudent(stu);
 	}
@@ -124,8 +140,24 @@ public class StudentManager {
 		String name = scanner.next();
 		System.out.println("请输入修改后的年龄");
 		int age = scanner.nextInt();
+		while(true) {
+			if(age > 120 || age < 0 ) {
+				System.out.println("年龄:"+age+"输入有误,请重新输入:");
+				age = scanner.nextInt();
+			}else {
+				break;
+			}	
+		}
 		System.out.println("请输入修改后的性别");
 		String sex = scanner.next();
+		while(true) {
+			if(!(sex.equals("男") || sex.equals("女"))) {
+				System.out.println("性别:"+sex+"输入有误,请重新输入:");
+				sex = scanner.next();
+			}else {
+				break;
+			}	
+		}
 		Student student = new Student(id, name, age, sex);
 		sdi.updateOneStudent(student);
 	}
